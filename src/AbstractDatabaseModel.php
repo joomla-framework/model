@@ -8,7 +8,7 @@
 
 namespace Joomla\Model;
 
-use Joomla\Database\DatabaseDriver;
+use Joomla\Database\DatabaseInterface;
 use Joomla\Registry\Registry;
 
 /**
@@ -21,7 +21,7 @@ abstract class AbstractDatabaseModel extends AbstractModel
 	/**
 	 * The database driver.
 	 *
-	 * @var    DatabaseDriver
+	 * @var    DatabaseInterface
 	 * @since  1.0
 	 */
 	protected $db;
@@ -29,12 +29,12 @@ abstract class AbstractDatabaseModel extends AbstractModel
 	/**
 	 * Instantiate the model.
 	 *
-	 * @param   DatabaseDriver  $db     The database adapter.
-	 * @param   Registry        $state  The model state.
+	 * @param   DatabaseInterface  $db     The database adapter.
+	 * @param   Registry           $state  The model state.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(DatabaseDriver $db, Registry $state = null)
+	public function __construct(DatabaseInterface $db, Registry $state = null)
 	{
 		$this->db = $db;
 
@@ -44,7 +44,7 @@ abstract class AbstractDatabaseModel extends AbstractModel
 	/**
 	 * Get the database driver.
 	 *
-	 * @return  DatabaseDriver  The database driver.
+	 * @return  DatabaseInterface  The database driver.
 	 *
 	 * @since   1.0
 	 */
@@ -56,13 +56,13 @@ abstract class AbstractDatabaseModel extends AbstractModel
 	/**
 	 * Set the database driver.
 	 *
-	 * @param   DatabaseDriver  $db  The database driver.
+	 * @param   DatabaseInterface  $db  The database driver.
 	 *
 	 * @return  void
 	 *
 	 * @since   1.0
 	 */
-	public function setDb(DatabaseDriver $db)
+	public function setDb(DatabaseInterface $db)
 	{
 		$this->db = $db;
 	}
