@@ -34,7 +34,7 @@ class AbstractModel implements ModelInterface
 	 */
 	public function __construct(Registry $state = null)
 	{
-		$this->state = ($state instanceof Registry) ? $state : new Registry;
+		$this->state = $state ?: new Registry;
 	}
 
 	/**
