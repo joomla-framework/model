@@ -9,8 +9,6 @@ namespace Joomla\Model\Tests;
 use Joomla\Model\AbstractModel;
 use Joomla\Registry\Registry;
 
-require_once __DIR__ . '/Stubs/DatabaseModel.php';
-
 /**
  * Tests for the Joomla\Model\AbstractModel class.
  *
@@ -19,7 +17,7 @@ require_once __DIR__ . '/Stubs/DatabaseModel.php';
 class AbstractModelTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    \Joomla\Model\AbstractModel
+	 * @var    AbstractModel
 	 * @since  1.0
 	 */
 	private $instance;
@@ -34,14 +32,11 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__construct()
 	{
-		$this->assertEquals(new Registry, $this->instance->getState(), 'Checks default state.');
-		$dbMock = $this->getMockBuilder('Joomla\\Database\\DatabaseDriver')
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+		$this->assertInstanceOf(Registry::class, $this->instance->getState(), 'Checks default state.');
 
-		$state = new Registry(array('foo' => 'bar'));
-		$class = new DatabaseModel($dbMock, $state);
-		$this->assertEquals($state, $class->getState(), 'Checks state injection.');
+		$state = $this->getMockBuilder(Registry::class)->getMock();
+		$class = $this->getMockForAbstractClass(AbstractModel::class, [$state]);
+		$this->assertSame($state, $class->getState(), 'Checks state injection.');
 	}
 
 	/**
@@ -55,7 +50,7 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetState()
 	{
-		$state = new Registry(array('foo' => 'bar'));
+		$state = $this->getMockBuilder(Registry::class)->getMock();
 		$this->instance->setState($state);
 		$this->assertSame($state, $this->instance->getState());
 	}
@@ -69,11 +64,6 @@ class AbstractModelTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$dbMock = $this->getMockBuilder('Joomla\\Database\\DatabaseDriver')
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
-
-		// Note: We're using DatabaseModel because it still uses the majority of the AbstractModel methods.
-		$this->instance = new DatabaseModel($dbMock);
+		$this->instance = $this->getMockForAbstractClass(AbstractModel::class);
 	}
 }

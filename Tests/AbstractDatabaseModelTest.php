@@ -6,9 +6,8 @@
 
 namespace Joomla\Model\Tests;
 
-use Joomla\Database\Tests\Mock as DatabaseMock;
-
-require_once __DIR__ . '/Stubs/DatabaseModel.php';
+use Joomla\Database\DatabaseInterface;
+use Joomla\Model\AbstractDatabaseModel;
 
 /**
  * Tests for the Joomla\Model\AbstractDatabaseModel class.
@@ -18,7 +17,7 @@ require_once __DIR__ . '/Stubs/DatabaseModel.php';
 class AbstractDatabaseModelTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    \Joomla\Model\AbstractDatabaseModel
+	 * @var    AbstractDatabaseModel|\PHPUnit_Framework_MockObject_MockObject
 	 * @since  1.0
 	 */
 	private $instance;
@@ -33,7 +32,7 @@ class AbstractDatabaseModelTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__construct()
 	{
-		$this->assertInstanceOf('Joomla\Database\DatabaseDriver', $this->instance->getDb());
+		$this->assertInstanceOf(DatabaseInterface::class, $this->instance->getDb());
 	}
 
 	/**
@@ -47,7 +46,9 @@ class AbstractDatabaseModelTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetDb()
 	{
-		$db = DatabaseMock\Driver::create($this);
+		$db = $this->getMockBuilder(DatabaseInterface::class)
+			->getMock();
+
 		$this->instance->setDb($db);
 
 		$this->assertSame($db, $this->instance->getDb());
@@ -64,6 +65,9 @@ class AbstractDatabaseModelTest extends \PHPUnit_Framework_TestCase
 	{
 		parent::setUp();
 
-		$this->instance = new DatabaseModel(DatabaseMock\Driver::create($this));
+		$mockDb = $this->getMockBuilder(DatabaseInterface::class)
+			->getMock();
+
+		$this->instance = $this->getMockForAbstractClass(AbstractDatabaseModel::class, [$mockDb]);
 	}
 }
