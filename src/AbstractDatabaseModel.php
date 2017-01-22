@@ -2,7 +2,7 @@
 /**
  * Part of the Joomla Framework Model Package
  *
- * @copyright  Copyright (C) 2005 - 2015 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2017 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -14,9 +14,10 @@ use Joomla\Registry\Registry;
 /**
  * Joomla Framework Database Model Class
  *
- * @since  1.0
+ * @since       1.0
+ * @deprecated  2.0  Implement the model interfaces directly; the concrete implementations are provided as traits
  */
-abstract class AbstractDatabaseModel extends AbstractModel
+abstract class AbstractDatabaseModel extends AbstractModel implements DatabaseModelInterface
 {
 	/**
 	 * The database driver.
