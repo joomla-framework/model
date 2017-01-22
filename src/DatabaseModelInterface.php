@@ -8,20 +8,19 @@
 
 namespace Joomla\Model;
 
-use Joomla\Database\DatabaseDriver;
+use Joomla\Database\DatabaseInterface;
 
 /**
  * Joomla Framework Database Model Interface
  *
  * @since  1.3.0
- * @note   As of 2.0 the `Joomla\Database\DatabaseInterface` will be typehinted.
  */
 interface DatabaseModelInterface
 {
 	/**
 	 * Get the database driver.
 	 *
-	 * @return  DatabaseDriver  The database driver.
+	 * @return  DatabaseInterface  The database driver.
 	 *
 	 * @since   1.3.0
 	 */

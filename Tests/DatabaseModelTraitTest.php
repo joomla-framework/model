@@ -14,7 +14,6 @@ class DatabaseModelTraitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @testdox  Calling getDb() without a DatabaseDriver set will throw an Exception
 	 *
-	 * @requires            PHP 5.4
 	 * @covers              Joomla\Model\DatabaseModelTraitTest::getDb
 	 * @expectedException   \UnexpectedValueException
 	 */
@@ -28,7 +27,6 @@ class DatabaseModelTraitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @testdox  A DatabaseDriver is set and retrieved
 	 *
-	 * @requires  PHP 5.4
 	 * @covers    Joomla\Model\DatabaseModelTraitTest::getDb
 	 * @covers    Joomla\Model\DatabaseModelTraitTest::setDb
 	 */
@@ -37,8 +35,8 @@ class DatabaseModelTraitTest extends \PHPUnit_Framework_TestCase
 		/** @var \Joomla\Model\DatabaseModelTrait $object */
 		$object = $this->getObjectForTrait('\\Joomla\\Model\\DatabaseModelTrait');
 
-		/** @var \Joomla\Database\DatabaseDriver $db */
-		$db = $this->getMockBuilder('\\Joomla\\Database\\DatabaseDriver')
+		/** @var \Joomla\Database\DatabaseInterface $db */
+		$db = $this->getMockBuilder('\\Joomla\\Database\\DatabaseInterface')
 			->disableOriginalConstructor()
 			->getMock();
 

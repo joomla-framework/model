@@ -14,7 +14,6 @@ class StatefulModelTraitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @testdox  Calling getState() without a state set will throw an Exception
 	 *
-	 * @requires            PHP 5.4
 	 * @covers              Joomla\Model\StatefulModelTraitTest::getState
 	 * @expectedException   \UnexpectedValueException
 	 */
@@ -28,7 +27,6 @@ class StatefulModelTraitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @testdox  A Registry representing the state is set and retrieved
 	 *
-	 * @requires  PHP 5.4
 	 * @covers    Joomla\Model\StatefulModelTraitTest::getState
 	 * @covers    Joomla\Model\StatefulModelTraitTest::setState
 	 */
