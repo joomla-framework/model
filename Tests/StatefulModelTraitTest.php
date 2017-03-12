@@ -6,15 +6,17 @@
 
 namespace Joomla\Model\Tests;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Tests for \Joomla\Model\StatefulModelTrait.
  */
-class StatefulModelTraitTest extends \PHPUnit_Framework_TestCase
+class StatefulModelTraitTest extends TestCase
 {
 	/**
 	 * @testdox  Calling getState() without a state set will throw an Exception
 	 *
-	 * @covers              Joomla\Model\StatefulModelTraitTest::getState
+	 * @covers              Joomla\Model\StatefulModelTrait::getState
 	 * @expectedException   \UnexpectedValueException
 	 */
 	public function testgetStateException()
@@ -27,8 +29,8 @@ class StatefulModelTraitTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @testdox  A Registry representing the state is set and retrieved
 	 *
-	 * @covers    Joomla\Model\StatefulModelTraitTest::getState
-	 * @covers    Joomla\Model\StatefulModelTraitTest::setState
+	 * @covers    Joomla\Model\StatefulModelTrait::getState
+	 * @covers    Joomla\Model\StatefulModelTrait::setState
 	 */
 	public function testSetAndgetState()
 	{
