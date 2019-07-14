@@ -6,6 +6,9 @@
 
 namespace Joomla\Model\Tests;
 
+use Joomla\Database\DatabaseInterface;
+use Joomla\Model\DatabaseModelTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,31 +19,30 @@ class DatabaseModelTraitTest extends TestCase
 	/**
 	 * @testdox  Calling getDb() without a DatabaseDriver set will throw an Exception
 	 *
-	 * @covers              Joomla\Model\DatabaseModelTrait::getDb
-	 * @expectedException   \UnexpectedValueException
+	 * @covers   Joomla\Model\DatabaseModelTrait::getDb
 	 */
 	public function testGetDbException()
 	{
-		/** @var \Joomla\Model\DatabaseModelTrait $object */
-		$object = $this->getObjectForTrait('\\Joomla\\Model\\DatabaseModelTrait');
+		$this->expectException(\UnexpectedValueException::class);
+
+		/** @var DatabaseModelTrait|MockObject $object */
+		$object = $this->getObjectForTrait(DatabaseModelTrait::class);
 		$object->getDb();
 	}
 
 	/**
 	 * @testdox  A DatabaseDriver is set and retrieved
 	 *
-	 * @covers    Joomla\Model\DatabaseModelTrait::getDb
-	 * @covers    Joomla\Model\DatabaseModelTrait::setDb
+	 * @covers   Joomla\Model\DatabaseModelTrait::getDb
+	 * @covers   Joomla\Model\DatabaseModelTrait::setDb
 	 */
 	public function testSetAndGetDb()
 	{
-		/** @var \Joomla\Model\DatabaseModelTrait $object */
-		$object = $this->getObjectForTrait('\\Joomla\\Model\\DatabaseModelTrait');
+		/** @var DatabaseModelTrait|MockObject $object */
+		$object = $this->getObjectForTrait(DatabaseModelTrait::class);
 
-		/** @var \Joomla\Database\DatabaseInterface $db */
-		$db = $this->getMockBuilder('\\Joomla\\Database\\DatabaseInterface')
-			->disableOriginalConstructor()
-			->getMock();
+		/** @var DatabaseInterface|MockObject $db */
+		$db = $this->createMock(DatabaseInterface::class);
 
 		$object->setDb($db);
 
