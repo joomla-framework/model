@@ -19,7 +19,7 @@ class DatabaseModelTraitTest extends TestCase
 	/**
 	 * @testdox  Calling getDb() without a DatabaseDriver set will throw an Exception
 	 *
-	 * @covers   Joomla\Model\DatabaseModelTrait::getDb
+	 * @covers   Joomla\Model\DatabaseModelTrait
 	 */
 	public function testGetDbException()
 	{
@@ -33,8 +33,7 @@ class DatabaseModelTraitTest extends TestCase
 	/**
 	 * @testdox  A DatabaseDriver is set and retrieved
 	 *
-	 * @covers   Joomla\Model\DatabaseModelTrait::getDb
-	 * @covers   Joomla\Model\DatabaseModelTrait::setDb
+	 * @covers   Joomla\Model\DatabaseModelTrait
 	 */
 	public function testSetAndGetDb()
 	{

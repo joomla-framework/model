@@ -19,7 +19,7 @@ class StatefulModelTraitTest extends TestCase
 	/**
 	 * @testdox  Calling getState() without a state set will throw an Exception
 	 *
-	 * @covers   Joomla\Model\StatefulModelTrait::getState
+	 * @covers   Joomla\Model\StatefulModelTrait
 	 */
 	public function testGetStateException()
 	{
@@ -33,8 +33,7 @@ class StatefulModelTraitTest extends TestCase
 	/**
 	 * @testdox  A Registry representing the state is set and retrieved
 	 *
-	 * @covers   Joomla\Model\StatefulModelTrait::getState
-	 * @covers   Joomla\Model\StatefulModelTrait::setState
+	 * @covers   Joomla\Model\StatefulModelTrait
 	 */
 	public function testSetAndgetState()
 	{
