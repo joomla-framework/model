@@ -9,8 +9,8 @@
         "php": "~8.1.0"
     },
     "require-dev": {
-        "joomla/database": "^2.0",
-        "joomla/registry": "^2.0",
+        "joomla/database": "3.0.x-dev",
+        "joomla/registry": "3.0.x-dev",
         "phpunit/phpunit": "^8.5|^9.0",
         "squizlabs/php_codesniffer": "~3.7.1"
     },
