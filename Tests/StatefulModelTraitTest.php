@@ -16,35 +16,35 @@ use PHPUnit\Framework\TestCase;
  */
 class StatefulModelTraitTest extends TestCase
 {
-	/**
-	 * @testdox  Calling getState() without a state set will throw an Exception
-	 *
-	 * @covers   Joomla\Model\StatefulModelTrait
-	 */
-	public function testGetStateException()
-	{
-		$this->expectException(\UnexpectedValueException::class);
+    /**
+     * @testdox  Calling getState() without a state set will throw an Exception
+     *
+     * @covers   Joomla\Model\StatefulModelTrait
+     */
+    public function testGetStateException()
+    {
+        $this->expectException(\UnexpectedValueException::class);
 
-		/** @var StatefulModelTrait|MockObject $object */
-		$object = $this->getObjectForTrait(StatefulModelTrait::class);
-		$object->getState();
-	}
+        /** @var StatefulModelTrait|MockObject $object */
+        $object = $this->getObjectForTrait(StatefulModelTrait::class);
+        $object->getState();
+    }
 
-	/**
-	 * @testdox  A Registry representing the state is set and retrieved
-	 *
-	 * @covers   Joomla\Model\StatefulModelTrait
-	 */
-	public function testSetAndgetState()
-	{
-		/** @var StatefulModelTrait|MockObject $object */
-		$object = $this->getObjectForTrait(StatefulModelTrait::class);
+    /**
+     * @testdox  A Registry representing the state is set and retrieved
+     *
+     * @covers   Joomla\Model\StatefulModelTrait
+     */
+    public function testSetAndgetState()
+    {
+        /** @var StatefulModelTrait|MockObject $object */
+        $object = $this->getObjectForTrait(StatefulModelTrait::class);
 
-		/** @var Registry|MockObject $state */
-		$state = $this->createMock(Registry::class);
+        /** @var Registry|MockObject $state */
+        $state = $this->createMock(Registry::class);
 
-		$object->setState($state);
+        $object->setState($state);
 
-		$this->assertSame($state, $object->getState());
-	}
+        $this->assertSame($state, $object->getState());
+    }
 }

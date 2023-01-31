@@ -17,12 +17,12 @@ use Joomla\Registry\Registry;
  */
 interface StatefulModelInterface
 {
-	/**
-	 * Get the model state.
-	 *
-	 * @return  Registry  The state object.
-	 *
-	 * @since   1.3.0
-	 */
-	public function getState();
+    /**
+     * Get the model state.
+     *
+     * @return  Registry  The state object.
+     *
+     * @since   1.3.0
+     */
+    public function getState();
 }

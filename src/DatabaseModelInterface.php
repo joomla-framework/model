@@ -17,12 +17,12 @@ use Joomla\Database\DatabaseInterface;
  */
 interface DatabaseModelInterface
 {
-	/**
-	 * Get the database driver.
-	 *
-	 * @return  DatabaseInterface  The database driver.
-	 *
-	 * @since   1.3.0
-	 */
-	public function getDb();
+    /**
+     * Get the database driver.
+     *
+     * @return  DatabaseInterface  The database driver.
+     *
+     * @since   1.3.0
+     */
+    public function getDb();
 }
