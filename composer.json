@@ -6,17 +6,19 @@
     "homepage": "https://github.com/joomla-framework/model",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": "~8.1.0"
+        "php": "^8.1.0"
     },
     "require-dev": {
         "joomla/database": "3.0.x-dev",
         "joomla/registry": "3.0.x-dev",
         "phpunit/phpunit": "^9.5.28",
-        "squizlabs/php_codesniffer": "~3.7.1"
+        "squizlabs/php_codesniffer": "^3.7.2",
+        "phpstan/phpstan": "^1.10.7",
+        "phan/phan": "^5.4.2"
     },
     "suggest": {
-        "joomla/database": "^2.0 Allows using database models",
-        "joomla/registry": "^2.0 Allows using stateful models"
+        "joomla/database": "^3.0 Allows using database models",
+        "joomla/registry": "^3.0 Allows using stateful models"
     },
     "autoload": {
         "psr-4": {
