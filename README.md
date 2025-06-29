@@ -1,4 +1,4 @@
-# The Model Package [![Build Status](https://ci.joomla.org/api/badges/joomla-framework/model/status.svg?ref=refs/heads/3.x-dev)](https://ci.joomla.org/joomla-framework/model)
+# The Model Package [![Build Status](https://github.com/joomla-framework/model/actions/workflows/ci.yml/badge.svg?branch=3.x-dev)](https://github.com/joomla-framework/model)
 
 [![Latest Stable Version](https://poser.pugx.org/joomla/model/v/stable)](https://packagist.org/packages/joomla/model)
 [![Total Downloads](https://poser.pugx.org/joomla/model/downloads)](https://packagist.org/packages/joomla/model)
