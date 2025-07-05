@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Trait Joomla\\Model\\DatabaseModelTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/DatabaseModelTrait.php
+
+		-
+			message: '#^Trait Joomla\\Model\\StatefulModelTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/StatefulModelTrait.php
