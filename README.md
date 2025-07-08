@@ -56,7 +56,7 @@ class MyModel extends AbstractModel
 
 #### Construction
 
-`Model\AbstractDatabaseModel` is extended from `Model\AbstractModel` and the contructor takes a required `Database\DatabaseDriver` object and an optional `Registry` object.
+`Model\AbstractDatabaseModel` is extended from `Model\AbstractModel` and the constructor takes a required `Database\DatabaseDriver` object and an optional `Registry` object.
 
 #### Usage
 
