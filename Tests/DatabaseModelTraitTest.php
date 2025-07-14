@@ -26,8 +26,7 @@ class DatabaseModelTraitTest extends TestCase
     {
         $this->expectException(\UnexpectedValueException::class);
 
-        /** @var DatabaseModelTrait|MockObject $object */
-        $object = $this->getObjectForTrait(DatabaseModelTrait::class);
+        $object = new TestModelObject();
         $object->getDb();
     }
 
@@ -38,8 +37,7 @@ class DatabaseModelTraitTest extends TestCase
      */
     public function testSetAndGetDb()
     {
-        /** @var DatabaseModelTrait|MockObject $object */
-        $object = $this->getObjectForTrait(DatabaseModelTrait::class);
+        $object = new TestModelObject();
 
         /** @var DatabaseInterface|MockObject $db */
         $db = $this->createMock(DatabaseInterface::class);

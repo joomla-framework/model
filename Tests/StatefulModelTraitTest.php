@@ -26,8 +26,7 @@ class StatefulModelTraitTest extends TestCase
     {
         $this->expectException(\UnexpectedValueException::class);
 
-        /** @var StatefulModelTrait|MockObject $object */
-        $object = $this->getObjectForTrait(StatefulModelTrait::class);
+        $object = new TestModelObject();
         $object->getState();
     }
 
@@ -38,8 +37,7 @@ class StatefulModelTraitTest extends TestCase
      */
     public function testSetAndgetState()
     {
-        /** @var StatefulModelTrait|MockObject $object */
-        $object = $this->getObjectForTrait(StatefulModelTrait::class);
+        $object = new TestModelObject();
 
         /** @var Registry|MockObject $state */
         $state = $this->createMock(Registry::class);
