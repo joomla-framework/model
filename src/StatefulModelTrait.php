@@ -40,7 +40,7 @@ trait StatefulModelTrait
             return $this->state;
         }
 
-        throw new \UnexpectedValueException('State not set in ' . __CLASS__);
+        throw new \UnexpectedValueException('State not set in ' . static::class);
     }
 
     /**

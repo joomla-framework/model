@@ -50,7 +50,9 @@ final class ArticleModel implements DatabaseModelInterface
 ```
 
 `getDb()` throws an `UnexpectedValueException` when no driver was set, so a model that was built
-incompletely fails at the point of use with a message naming the class.
+incompletely fails at the point of use with a message naming the runtime class of the model.
+`getState()` behaves the same way. (Up to 4.0.1 both named the class that uses the trait, so a
+subclass reported its parent.)
 
 ## A stateful model
 
@@ -110,10 +112,6 @@ composer require joomla/model joomla/database joomla/registry
 `StatefulModelInterface` only `getState()`. `setDb()` and `setState()` come from the traits. Code
 that receives a `DatabaseModelInterface` therefore cannot inject a driver in a type safe way —
 prefer constructor injection, as in the examples above.
-
-**Exception messages name the wrong class in a hierarchy.** Both traits build the message with
-`__CLASS__`, which resolves to the class that *uses* the trait, not to the runtime class. If `B`
-extends `A` and `A` uses the trait, an incomplete `B` reports `A`.
 
 ## What this package does not do
 
