@@ -1,118 +1,53 @@
-# The Model Package [![Build Status](https://github.com/joomla-framework/model/actions/workflows/ci.yml/badge.svg?branch=3.x-dev)](https://github.com/joomla-framework/model)
+# The Model Package [![Build Status](https://github.com/joomla-framework/model/actions/workflows/ci.yml/badge.svg?branch=4.x-dev)](https://github.com/joomla-framework/model)
 
 [![Latest Stable Version](https://poser.pugx.org/joomla/model/v/stable)](https://packagist.org/packages/joomla/model)
 [![Total Downloads](https://poser.pugx.org/joomla/model/downloads)](https://packagist.org/packages/joomla/model)
 [![Latest Unstable Version](https://poser.pugx.org/joomla/model/v/unstable)](https://packagist.org/packages/joomla/model)
 [![License](https://poser.pugx.org/joomla/model/license)](https://packagist.org/packages/joomla/model)
 
-## Interfaces
+The Model package provides the interfaces and traits a model class needs to hold a database driver and a state
+object. It has no base class and no CRUD.
 
-### `Model\ModelInterface`
+| Type | Purpose |
+|---|---|
+| `Joomla\Model\DatabaseModelInterface` | A model that exposes a database driver: `getDb()` |
+| `Joomla\Model\DatabaseModelTrait` | Implementation of `getDb()`, plus `setDb()` |
+| `Joomla\Model\StatefulModelInterface` | A model that exposes a `Joomla\Registry\Registry` state: `getState()` |
+| `Joomla\Model\StatefulModelTrait` | Implementation of `getState()`, plus `setState()` |
 
-`Model\ModelInterface` is an interface that requires a class to be implemented with a `getState` and a `setState` method.
-
-## Classes
-
-# `Model\AbstractModel`
-
-#### Construction
-
-The contructor for a new `Model\AbstractModel` object takes an optional `Registry` object that defines the state of the model. If omitted, an empty `Registry` object will be assigned automatically.
-
-#### Usage
-
-The `Model\AbstractModel` class is abstract. All requirements of the interface are already satisfied by the base class.
+The two pairs are independent; use one, the other, or both. The getters throw an `UnexpectedValueException` when
+nothing was set, so pass the driver and the state in, for example through the constructor:
 
 ```php
+use Joomla\Database\DatabaseInterface;
+use Joomla\Model\DatabaseModelInterface;
+use Joomla\Model\DatabaseModelTrait;
+use Joomla\Model\StatefulModelInterface;
+use Joomla\Model\StatefulModelTrait;
+use Joomla\Registry\Registry;
 
-namespace MyApp;
-
-use Joomla\Model\AbstractModel;
-
-/**
- * My custom model.
- *
- * @pacakge  Examples
- *
- * @since   1.0
- */
-class MyModel extends AbstractModel
+final class ArticleListModel implements DatabaseModelInterface, StatefulModelInterface
 {
-  /**
-	 * Get the time.
-	 *
-	 * @return  integer
-	 *
-	 * @since   1.0
-	 */
-	public function getTime()
-	{
-		return time();
-	}
+    use DatabaseModelTrait;
+    use StatefulModelTrait;
+
+    public function __construct(DatabaseInterface $db, Registry $state)
+    {
+        $this->setDb($db);
+        $this->setState($state);
+    }
+
+    public function getLimit(): int
+    {
+        return (int) $this->getState()->get('list.limit', 20);
+    }
 }
 ```
 
-# `Model\AbstractDatabaseModel`
+`joomla/database` and `joomla/registry` are only suggested dependencies; install the ones you use.
 
-#### Construction
-
-`Model\AbstractDatabaseModel` is extended from `Model\AbstractModel` and the constructor takes a required `Database\DatabaseDriver` object and an optional `Registry` object.
-
-#### Usage
-
-The `Model\AbstractDatabaseModel` class is abstract so cannot be used directly. It forms a base for any model that needs to interact with a database.
-
-```php
-
-namespace MyApp
-
-use Joomla\Model;
-use Joomla\Database;
-
-/**
- * My custom database model.
- *
- * @package  Examples
- *
- * @since   1.0
- */
-class MyDatabaseModel extends Model\AbstractDatabaseModel
-{
-	/**
-	 * Get the content count.
-	 *
-	 * @return  integer
-	 *
-	 * @since   1.0
-	 * @throws  RuntimeException on database error.
-	 */
-	public function getCount()
-	{
-		// Get the query builder from the internal database object.
-		$q = $this->db->getQuery(true);
-
-		// Prepare the query to count the number of content records.
-		$q->select('COUNT(*)')->from($q->qn('#__content'));
-
-		$this->db->setQuery($q);
-
-		// Execute and return the result.
-		return $this->db->loadResult();
-	}
-}
-
-try
-{
-	$driver = Database\DatabaseFactory::getInstance()->getDriver('mysqli');
-	$model = new MyDatabaseModel($driver);
-	$count = $model->getCount();
-}
-catch (RuntimeException $e)
-{
-	// Handle database error.
-}
-```
-
+See the [documentation](docs/index.md) for details, and the update guides in `docs/` when upgrading between major
+versions.
 
 ## Installation via Composer
 
