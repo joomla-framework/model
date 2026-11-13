@@ -21,7 +21,7 @@ trait DatabaseModelTrait
     /**
      * The database driver.
      *
-     * @var    DatabaseInterface
+     * @var    DatabaseInterface|null
      * @since  1.3.0
      */
     protected $db;

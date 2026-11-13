@@ -1,7 +1,6 @@
 
 includes:
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- phpstan-baseline.neon
 
 parameters:
 	level: 5
@@ -9,3 +8,5 @@ parameters:
 	reportUnmatchedIgnoredErrors: false
 	paths:
 		- src
+		# Uses both traits, which PHPStan does not analyse on their own
+		- Tests/TestModelObject.php

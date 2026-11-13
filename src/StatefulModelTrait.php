@@ -21,7 +21,7 @@ trait StatefulModelTrait
     /**
      * The model state.
      *
-     * @var    Registry
+     * @var    Registry|null
      * @since  1.3.0
      */
     protected $state;
