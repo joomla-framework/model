@@ -21,10 +21,10 @@ trait DatabaseModelTrait
     /**
      * The database driver.
      *
-     * @var    DatabaseInterface
+     * @var    DatabaseInterface|null
      * @since  1.3.0
      */
-    protected $db;
+    protected ?DatabaseInterface $db = null;
 
     /**
      * Get the database driver.
@@ -34,7 +34,7 @@ trait DatabaseModelTrait
      * @since   1.3.0
      * @throws  \UnexpectedValueException
      */
-    public function getDb()
+    public function getDb(): DatabaseInterface
     {
         if ($this->db) {
             return $this->db;
@@ -52,7 +52,7 @@ trait DatabaseModelTrait
      *
      * @since   1.3.0
      */
-    public function setDb(DatabaseInterface $db)
+    public function setDb(DatabaseInterface $db): void
     {
         $this->db = $db;
     }

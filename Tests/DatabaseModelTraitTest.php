@@ -8,7 +8,9 @@
 namespace Joomla\Model\Tests;
 
 use Joomla\Database\DatabaseInterface;
+use Joomla\Model\DatabaseModelInterface;
 use Joomla\Model\DatabaseModelTrait;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -45,5 +47,32 @@ class DatabaseModelTraitTest extends TestCase
         $object->setDb($db);
 
         $this->assertSame($db, $object->getDb());
+    }
+
+    #[TestDox('The interface declares the typed getter and setter')]
+    public function testInterfaceDeclaresTypedAccessors()
+    {
+        $interface = new \ReflectionClass(DatabaseModelInterface::class);
+
+        $this->assertSame(DatabaseInterface::class, (string) $interface->getMethod('getDb')->getReturnType());
+        $this->assertTrue($interface->hasMethod('setDb'), 'setDb() is declared on the interface');
+        $this->assertSame(DatabaseInterface::class, (string) $interface->getMethod('setDb')->getParameters()[0]->getType());
+        $this->assertSame('void', (string) $interface->getMethod('setDb')->getReturnType());
+    }
+
+    #[TestDox('The driver is injected through the interface')]
+    public function testSetDbThroughInterface()
+    {
+        $model = $this->createModel();
+        $value = $this->createStub(DatabaseInterface::class);
+
+        $model->setDb($value);
+
+        $this->assertSame($value, $model->getDb());
+    }
+
+    private function createModel(): DatabaseModelInterface
+    {
+        return new TestModelObject();
     }
 }

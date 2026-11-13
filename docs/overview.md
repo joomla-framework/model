@@ -12,10 +12,10 @@ composer require joomla/model
 
 | Type | Purpose |
 |---|---|
-| `Joomla\Model\DatabaseModelInterface` | A model that exposes a database driver — `getDb()` |
-| `Joomla\Model\DatabaseModelTrait` | Implementation, plus `setDb()` |
-| `Joomla\Model\StatefulModelInterface` | A model that exposes a state object — `getState()` |
-| `Joomla\Model\StatefulModelTrait` | Implementation, plus `setState()` |
+| `Joomla\Model\DatabaseModelInterface` | A model holding a database driver — `getDb(): DatabaseInterface`, `setDb(DatabaseInterface $db): void` |
+| `Joomla\Model\DatabaseModelTrait` | Implementation of `DatabaseModelInterface` |
+| `Joomla\Model\StatefulModelInterface` | A model holding a state object — `getState(): Registry`, `setState(Registry $state): void` |
+| `Joomla\Model\StatefulModelTrait` | Implementation of `StatefulModelInterface` |
 
 The two pairs are independent. Use one, the other, or both.
 
@@ -106,10 +106,14 @@ hint them. Install what you use:
 composer require joomla/model joomla/database joomla/registry
 ```
 
-**The setters are not part of the interfaces.** `DatabaseModelInterface` declares only `getDb()`,
-`StatefulModelInterface` only `getState()`. `setDb()` and `setState()` come from the traits. Code
-that receives a `DatabaseModelInterface` therefore cannot inject a driver in a type safe way —
-prefer constructor injection, as in the examples above.
+**The setters are part of the interfaces.** `DatabaseModelInterface` declares `getDb()` and
+`setDb()`, `StatefulModelInterface` `getState()` and `setState()`, so code that receives a model
+through the interface can inject a driver or state. Constructor injection, as in the examples
+above, is still the simplest way to make sure a model is complete.
+
+**The traits declare typed properties.** `DatabaseModelTrait` declares
+`protected ?DatabaseInterface $db = null`, `StatefulModelTrait` `protected ?Registry $state = null`.
+A class using a trait must not redeclare that property with a different type or default.
 
 **Exception messages name the wrong class in a hierarchy.** Both traits build the message with
 `__CLASS__`, which resolves to the class that *uses* the trait, not to the runtime class. If `B`

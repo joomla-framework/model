@@ -21,10 +21,10 @@ trait StatefulModelTrait
     /**
      * The model state.
      *
-     * @var    Registry
+     * @var    Registry|null
      * @since  1.3.0
      */
-    protected $state;
+    protected ?Registry $state = null;
 
     /**
      * Get the model state.
@@ -34,7 +34,7 @@ trait StatefulModelTrait
      * @since   1.3.0
      * @throws  \UnexpectedValueException
      */
-    public function getState()
+    public function getState(): Registry
     {
         if ($this->state) {
             return $this->state;
@@ -52,7 +52,7 @@ trait StatefulModelTrait
      *
      * @since   1.3.0
      */
-    public function setState(Registry $state)
+    public function setState(Registry $state): void
     {
         $this->state = $state;
     }

@@ -25,5 +25,16 @@ interface StatefulModelInterface
      *
      * @since   1.3.0
      */
-    public function getState();
+    public function getState(): Registry;
+
+    /**
+     * Set the model state.
+     *
+     * @param   Registry  $state  The state object.
+     *
+     * @return  void
+     *
+     * @since   __DEPLOY_VERSION__
+     */
+    public function setState(Registry $state): void;
 }
