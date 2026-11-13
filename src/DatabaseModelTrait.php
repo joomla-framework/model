@@ -40,7 +40,7 @@ trait DatabaseModelTrait
             return $this->db;
         }
 
-        throw new \UnexpectedValueException('Database driver not set in ' . __CLASS__);
+        throw new \UnexpectedValueException('Database driver not set in ' . static::class);
     }
 
     /**

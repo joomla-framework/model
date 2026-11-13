@@ -9,6 +9,7 @@ namespace Joomla\Model\Tests;
 
 use Joomla\Database\DatabaseInterface;
 use Joomla\Model\DatabaseModelTrait;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -27,6 +28,16 @@ class DatabaseModelTraitTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
 
         $object = new TestModelObject();
+        $object->getDb();
+    }
+
+    #[TestDox('The exception message names the runtime class of the model')]
+    public function testGetDbExceptionNamesRuntimeClass()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('Database driver not set in ' . TestChildModelObject::class);
+
+        $object = new TestChildModelObject();
         $object->getDb();
     }
 

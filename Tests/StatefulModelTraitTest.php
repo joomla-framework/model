@@ -9,6 +9,7 @@ namespace Joomla\Model\Tests;
 
 use Joomla\Model\StatefulModelTrait;
 use Joomla\Registry\Registry;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -27,6 +28,16 @@ class StatefulModelTraitTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
 
         $object = new TestModelObject();
+        $object->getState();
+    }
+
+    #[TestDox('The exception message names the runtime class of the model')]
+    public function testGetStateExceptionNamesRuntimeClass()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessage('State not set in ' . TestChildModelObject::class);
+
+        $object = new TestChildModelObject();
         $object->getState();
     }
 
