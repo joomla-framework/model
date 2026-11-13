@@ -7,8 +7,10 @@
 
 namespace Joomla\Model\Tests;
 
+use Joomla\Model\StatefulModelInterface;
 use Joomla\Model\StatefulModelTrait;
 use Joomla\Registry\Registry;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -45,5 +47,32 @@ class StatefulModelTraitTest extends TestCase
         $object->setState($state);
 
         $this->assertSame($state, $object->getState());
+    }
+
+    #[TestDox('The interface declares the typed getter and setter')]
+    public function testInterfaceDeclaresTypedAccessors()
+    {
+        $interface = new \ReflectionClass(StatefulModelInterface::class);
+
+        $this->assertSame(Registry::class, (string) $interface->getMethod('getState')->getReturnType());
+        $this->assertTrue($interface->hasMethod('setState'), 'setState() is declared on the interface');
+        $this->assertSame(Registry::class, (string) $interface->getMethod('setState')->getParameters()[0]->getType());
+        $this->assertSame('void', (string) $interface->getMethod('setState')->getReturnType());
+    }
+
+    #[TestDox('The state is injected through the interface')]
+    public function testSetStateThroughInterface()
+    {
+        $model = $this->createModel();
+        $value = $this->createStub(Registry::class);
+
+        $model->setState($value);
+
+        $this->assertSame($value, $model->getState());
+    }
+
+    private function createModel(): StatefulModelInterface
+    {
+        return new TestModelObject();
     }
 }
